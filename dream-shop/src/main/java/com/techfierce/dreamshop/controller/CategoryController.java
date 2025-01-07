@@ -89,7 +89,7 @@ public class CategoryController {
         }
     }
 
-    @DeleteMapping("/delete-category")
+    @DeleteMapping("/delete-category/{categoryId}")
     public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Long categoryId){
         try {
             iCategoryService.deleteCategory(categoryId);
