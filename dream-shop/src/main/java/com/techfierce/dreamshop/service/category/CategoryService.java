@@ -64,6 +64,6 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public List<Category> getAllCategory() {
-        return List.of();
+        return categoryRepository.findAll();
     }
 }
