@@ -5,11 +5,13 @@ import com.techfierce.dreamshop.exceptions.ResourceNotFound;
 import com.techfierce.dreamshop.model.Category;
 import com.techfierce.dreamshop.repository.CategoryRepository;
 import com.techfierce.dreamshop.requests.CategoryRequest;
+import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CategoryService implements ICategoryService{
     private final CategoryRepository categoryRepository;
 
