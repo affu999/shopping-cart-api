@@ -37,7 +37,7 @@ public class ProductController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<ApiResponse> getProductById(){
+    public ResponseEntity<ApiResponse> getAllProducts(){
         try {
             List<Product> products = iProductService.getAllProducts();
             return ResponseEntity.ok(new ApiResponse("Success", products));

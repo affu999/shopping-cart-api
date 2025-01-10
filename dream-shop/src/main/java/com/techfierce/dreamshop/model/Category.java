@@ -1,5 +1,6 @@
 package com.techfierce.dreamshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "category")
      private List<Product> products;
 
     public Long getId() {
@@ -40,6 +42,8 @@ public class Category {
     public Category(String name) {
         this.name = name;
     }
+
+    public Category(){}
 
     public void setProducts(List<Product> products) {
         this.products = products;
