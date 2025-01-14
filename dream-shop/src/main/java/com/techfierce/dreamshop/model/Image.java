@@ -8,10 +8,6 @@ import lombok.Setter;
 
 import java.sql.Blob;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Image {
     @Id
