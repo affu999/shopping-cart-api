@@ -1,5 +1,6 @@
 package com.techfierce.dreamshop.service.product;
 
+import com.techfierce.dreamshop.dto.ProductDto;
 import com.techfierce.dreamshop.model.Product;
 import com.techfierce.dreamshop.requests.ProductAddRequest;
 import com.techfierce.dreamshop.requests.ProductUpdateRequest;
@@ -19,4 +20,7 @@ public interface IProductService {
     List<Product> getProductsByBrandAndName(String brand, String name);
     Long countProductsByBrandAndName(String brand, String name);
 
+    List<ProductDto> getProductDto(List<Product> products);
+
+    ProductDto convertToDto(Product product);
 }

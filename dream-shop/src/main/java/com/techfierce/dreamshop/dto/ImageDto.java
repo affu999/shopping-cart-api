@@ -1,18 +1,16 @@
 package com.techfierce.dreamshop.dto;
 
-import org.springframework.stereotype.Component;
-
 public class ImageDto {
-    private Long id;
-    private String imageName;
-    private String downloadUrl;
+    public  Long id;
+    public  String fileName;
+    public  String downloadUrl;
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public void setDownloadUrl(String downloadUrl) {
@@ -23,17 +21,20 @@ public class ImageDto {
         return id;
     }
 
-    public String getImageName() {
-        return imageName;
+    public String getFileName() {
+        return fileName;
     }
 
     public String getDownloadUrl() {
         return downloadUrl;
     }
 
+    public ImageDto() {
+    }
+
     public ImageDto(Long id, String imageName, String downloadUrl) {
         this.id = id;
-        this.imageName = imageName;
+        this.fileName = imageName;
         this.downloadUrl = downloadUrl;
     }
 }

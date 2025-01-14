@@ -1,5 +1,7 @@
 package com.techfierce.dreamshop.service.product;
 
+import com.techfierce.dreamshop.dto.ImageDto;
+import com.techfierce.dreamshop.dto.ProductDto;
 import com.techfierce.dreamshop.exceptions.ProductNotFoundException;
 import com.techfierce.dreamshop.exceptions.ResourceNotFound;
 import com.techfierce.dreamshop.model.Category;
@@ -8,6 +10,7 @@ import com.techfierce.dreamshop.repository.CategoryRepository;
 import com.techfierce.dreamshop.repository.ProductRepository;
 import com.techfierce.dreamshop.requests.ProductAddRequest;
 import com.techfierce.dreamshop.requests.ProductUpdateRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,13 +20,15 @@ import java.util.Optional;
 public class ProductService implements IProductService{
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final ModelMapper modelMapper;
 
     public ProductService(
             ProductRepository productRepository,
-            CategoryRepository categoryRepository
+            CategoryRepository categoryRepository, ModelMapper modelMapper
     ) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -112,6 +117,24 @@ public class ProductService implements IProductService{
     @Override
     public Long countProductsByBrandAndName(String brand, String name) {
         return productRepository.countByBrandAndName(brand, name);
+    }
+
+    public ModelMapper getModelMapper() {
+        return modelMapper;
+    }
+
+    @Override
+    public List<ProductDto> getProductDto(List<Product> products){
+        return products.stream().map(this::convertToDto).toList();
+    }
+
+    @Override
+    public ProductDto convertToDto(Product product){
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+        List<ImageDto> imageDtos = product.getImages().stream().map(image ->
+            modelMapper.map(image, ImageDto.class)).toList();
+        productDto.setImages(imageDtos);
+        return productDto;
     }
 
 }

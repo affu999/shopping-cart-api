@@ -1,5 +1,6 @@
 package com.techfierce.dreamshop.controller;
 
+import com.techfierce.dreamshop.dto.ProductDto;
 import com.techfierce.dreamshop.exceptions.ProductNotFoundException;
 import com.techfierce.dreamshop.exceptions.ResourceNotFound;
 import com.techfierce.dreamshop.model.Product;
@@ -40,7 +41,8 @@ public class ProductController {
     public ResponseEntity<ApiResponse> getAllProducts(){
         try {
             List<Product> products = iProductService.getAllProducts();
-            return ResponseEntity.ok(new ApiResponse("Success", products));
+            List<ProductDto> productDtos = iProductService.getProductDto(products);
+            return ResponseEntity.ok(new ApiResponse("Success", productDtos));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new ApiResponse("Error: " + e.getMessage(), null)
@@ -85,7 +87,8 @@ public class ProductController {
     public ResponseEntity<ApiResponse> getProductById(@PathVariable Long id){
         try {
             Product product = iProductService.getProductById(id);
-            return ResponseEntity.ok(new ApiResponse("Success", product));
+            ProductDto productDto = iProductService.convertToDto(product);
+            return ResponseEntity.ok(new ApiResponse("Success", productDto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new ApiResponse("Error: " + e.getMessage(), null)
